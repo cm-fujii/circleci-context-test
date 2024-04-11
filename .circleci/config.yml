@@ -1,0 +1,21 @@
+version: 2.1
+
+executors:
+  normal_container:
+    docker:
+      - image: cimg/python:3.11
+
+jobs:
+  build:
+    executor: normal_container
+    steps:
+      - checkout
+      - run:
+          name: build
+          command: |
+            echo build!!
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
