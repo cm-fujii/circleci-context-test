@@ -6,16 +6,33 @@ executors:
       - image: cimg/python:3.11
 
 jobs:
-  build:
+  build1:
     executor: normal_container
     steps:
       - checkout
       - run:
-          name: build
+          name: build1
           command: |
-            echo build!!
+            echo $message
+
+  build2:
+    executor: normal_container
+    steps:
+      - checkout
+      - run:
+          name: build2
+          command: |
+            echo $message
 
 workflows:
   build_and_test:
     jobs:
-      - build
+      - build1:
+          context:
+            - english
+            - japanese
+
+      - build2:
+          context:
+            - japanese
+            - english
