@@ -13,7 +13,7 @@ jobs:
       - run:
           name: build1
           command: |
-            echo $message
+            echo $env
 
   build2:
     executor: normal_container
@@ -22,17 +22,17 @@ jobs:
       - run:
           name: build2
           command: |
-            echo $message
+            echo $env
 
 workflows:
   build_and_test:
     jobs:
       - build1:
           context:
-            - english
-            - japanese
+            - development
+            - production
 
       - build2:
           context:
-            - japanese
-            - english
+            - production
+            - development
